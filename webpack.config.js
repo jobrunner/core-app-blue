@@ -17,11 +17,31 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          'raw-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('postcss-import'),
+                ],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: 'raw-loader',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index-template.html',
+      template: './index.html',
     }),
   ],
   devServer: {
